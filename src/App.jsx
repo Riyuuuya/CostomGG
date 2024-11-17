@@ -1,37 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import { supabase } from './supabaseClient';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import UsersPage from "./UsersPage"; // ユーザーページ
+import ChampionsPage from "./ChampionsPage"; // チャンピオンページ
 
 const App = () => {
-  const [matchHistory, setMatchHistory] = useState([]);
-
-  // データ取得処理
-  const fetchData = async () => {
-    const { data, error } = await supabase
-      .from('match_history') // テーブル名を指定
-      .select('*'); // 全データを取得
-
-    if (error) {
-      console.error('データ取得エラー:', error);
-    } else {
-      setMatchHistory(data);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   return (
-    <div>
-      <h1>Match History</h1>
-      <ul>
-        {matchHistory.map((match) => (
-          <li key={match.id}>
-            {match.player} - {match.win ? 'Win' : 'Lose'}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Router>
+      <div>
+        {/* ナビゲーションメニュー */}
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Users Page</Link>
+            </li>
+            <li>
+              <Link to="/champions">Champions Page</Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* ルート設定 */}
+        <Routes>
+          <Route path="/" element={<UsersPage />} />
+          <Route path="/champions" element={<ChampionsPage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 

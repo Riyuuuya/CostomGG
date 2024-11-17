@@ -1,9 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App'; // App.jsx をインポート
+import React from "react";
+import ReactDOM from "react-dom/client"; // React 18では "react-dom/client" を使用
+import App from "./App";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-// ReactアプリをHTMLにマウント
-ReactDOM.createRoot(document.getElementById('root')).render(
+const root = ReactDOM.createRoot(document.getElementById("root")); // createRootを使用
+root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
